@@ -3,7 +3,7 @@ import {
   Text,
 } from 'react-native';
 
-export default class App extends Component {
+export default class PluralTodo extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
