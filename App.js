@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import {
-  Text,
-} from 'react-native';
 import TaskList from './TaskList';
 
 export default class PluralTodo extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      todos: [
-        { task: 'Finish Pluralsight Tutorial' },
-        { task: 'Cleanup NatRhythms App component' },
+      tasks: [
+        { name: 'Finish Pluralsight Tutorial..' },
+        { name: 'Cleanup NatRhythms App component..' },
       ],
     };
+    this.onAddStarted = this.onAddStarted.bind(this);
+  }
+  onAddStarted() {
+    console.log('add started');
   }
   render() {
     return (
-      <TaskList />
+      <TaskList tasks={this.state.tasks} onAddStarted={this.onAddStarted} />
     );
   }
 }
