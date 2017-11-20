@@ -54,12 +54,18 @@ export default class TaskForm extends Component {
     return (
       <View style={styles.container}>
         <TextInput style={styles.input} />
-        <TouchableHighlight style={styles.buttonContainer}>
+        <TouchableHighlight
+          style={styles.buttonContainer}
+          onPress={this.props.onAdd}
+        >
           <Text style={styles.button}>
             Add
           </Text>
         </TouchableHighlight>
-        <TouchableHighlight style={[styles.buttonContainer, styles.cancelButtonContainer]}>
+        <TouchableHighlight
+          style={[styles.buttonContainer, styles.cancelButtonContainer]}
+          onPress={this.props.onCancel}
+        >
           <Text style={styles.button}>
             Cancel
           </Text>
