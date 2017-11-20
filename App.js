@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import TaskList from './TaskList';
+import { StackNavigator } from 'react-navigation';
+
+import Home from './Home';
+import TaskFormScreen from './TaskForm';
+
+
+const Nav = StackNavigator({
+  TaskList: {
+    screen: Home,
+  },
+  TaskForm: {
+    screen: TaskFormScreen,
+  },
+});
 
 export default class PluralTodo extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      tasks: [
-        { name: 'Finish Pluralsight Tutorial..' },
-        { name: 'Cleanup NatRhythms App component..' },
-      ],
-    };
-    this.onAddStarted = this.onAddStarted.bind(this);
-  }
-  onAddStarted() {
-    console.log('add started');
-  }
   render() {
     return (
-      <TaskList tasks={this.state.tasks} onAddStarted={this.onAddStarted} />
+      <Nav ref={nav => this.navigator = nav} />
     );
   }
 }
