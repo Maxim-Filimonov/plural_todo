@@ -32,10 +32,16 @@ export default class PluralTodo extends Component {
   render() {
     const Nav = StackNavigator({
       TaskList: {
-        screen: createComponent(TaskList, { tasks: this.state.tasks, onAddStarted: this.onAddStarted }),
+        screen: createComponent(TaskList, {
+          tasks: this.state.tasks,
+          onAddStarted: this.onAddStarted,
+        }),
       },
       TaskForm: {
-        screen: createComponent(TaskForm, { onCancel: this.onAddCancel, onAdd: this.onAddSubmit }),
+        screen: createComponent(TaskForm, {
+          onCancel: this.onAddCancel,
+          onAdd: this.onAddSubmit,
+        }),
       },
     });
     return (
