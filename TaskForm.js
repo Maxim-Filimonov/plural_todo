@@ -43,38 +43,37 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class TaskForm extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      name: '',
-    };
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <TextInput style={styles.input} />
-        <TouchableHighlight
-          style={styles.buttonContainer}
-          onPress={this.props.onAdd}
-        >
-          <Text style={styles.button}>
-            Add
-          </Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={[styles.buttonContainer, styles.cancelButtonContainer]}
-          onPress={this.props.onCancel}
-        >
-          <Text style={styles.button}>
-            Cancel
-          </Text>
-        </TouchableHighlight>
-      </View>
-    );
-  }
+function TaskForm(props) {
+  return (
+    <View style={styles.container}>
+      <TextInput style={styles.input} />
+      <TouchableHighlight
+        style={styles.buttonContainer}
+        onPress={props.onAdd}
+      >
+        <Text style={styles.button}>
+          Add
+        </Text>
+      </TouchableHighlight>
+      <TouchableHighlight
+        style={[styles.buttonContainer, styles.cancelButtonContainer]}
+        onPress={props.onCancel}
+      >
+        <Text style={styles.button}>
+          Cancel
+        </Text>
+      </TouchableHighlight>
+    </View>
+  );
 }
 TaskForm.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
 };
+
+// This is needed to make HMR stay on the same route
+export default class extends Component {
+  render() {
+    return <TaskForm {...this.props} />;
+  }
+}

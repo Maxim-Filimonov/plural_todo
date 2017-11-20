@@ -32,37 +32,32 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-class TaskList extends Component {
-  constructor(props, context) {
-    super(props, context);
-    const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
-    this.state = {
-      taskSource: dataSource.cloneWithRows(props.tasks),
-    };
-  }
-  renderRow(task) {
-    return (
-      <TaskRow task={task} />
-    );
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <ListView
-          dataSource={this.state.taskSource}
-          renderRow={this.renderRow.bind(this)}
-        />
-        <TouchableHighlight onPress={this.props.onAddStarted} style={styles.buttonContainer}>
-          <Text style={styles.button}>Add one</Text>
-        </TouchableHighlight>
-      </View>
-    );
-  }
+
+const renderRow = task => <TaskRow task={task} />;
+function TaskList(props) {
+  const dataSource = new ListView.DataSource({
+    rowHasChanged: (r1, r2) => r1 !== r2,
+  });
+  const taskSource = dataSource.cloneWithRows(props.tasks);
+  return (
+    <View style={styles.container}>
+      <ListView
+        dataSource={taskSource}
+        renderRow={renderRow}
+      />
+      <TouchableHighlight onPress={props.onAddStarted} style={styles.buttonContainer}>
+        <Text style={styles.button}>Add one</Text>
+      </TouchableHighlight>
+    </View>
+  );
 }
 TaskList.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   onAddStarted: PropTypes.func.isRequired,
 };
-export default TaskList;
+// This is needed to make HMR stay on the same route
+export default class extends Component {
+  render() {
+    return <TaskList {...this.props} />;
+  }
+}
