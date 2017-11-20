@@ -6,6 +6,7 @@ import {
   TouchableHighlight,
   StyleSheet,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   container: {
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class TaskFormScreen extends Component {
+export default class TaskForm extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -67,3 +68,7 @@ export default class TaskFormScreen extends Component {
     );
   }
 }
+TaskForm.propTypes = {
+  onCancel: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
+};
