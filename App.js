@@ -23,8 +23,11 @@ export default class PluralTodo extends Component {
   onAddCancel() {
     this.navigator.dispatch(NavigationActions.back({}));
   }
-  onAddSubmit() {
-    console.log('Submitting!');
+  onAddSubmit(task) {
+    this.setState({
+      tasks: this.state.tasks.concat([{ name: task }]),
+    });
+    this.navigator.dispatch(NavigationActions.back({}));
   }
   onAddStarted() {
     this.navigator.dispatch(NavigationActions.navigate({ routeName: 'TaskForm' }));

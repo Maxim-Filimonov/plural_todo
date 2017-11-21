@@ -44,12 +44,13 @@ const styles = StyleSheet.create({
 });
 
 function TaskForm(props) {
+  let task = '';
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} />
+      <TextInput style={styles.input} onChangeText={(val) => { task = val; }} />
       <TouchableHighlight
         style={styles.buttonContainer}
-        onPress={props.onAdd}
+        onPress={() => props.onAdd(task)}
       >
         <Text style={styles.button}>
           Add
