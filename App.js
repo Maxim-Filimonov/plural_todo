@@ -19,6 +19,7 @@ export default class PluralTodo extends Component {
     this.onAddStarted = this.onAddStarted.bind(this);
     this.onAddCancel = this.onAddCancel.bind(this);
     this.onAddSubmit = this.onAddSubmit.bind(this);
+    this.onTaskRemove = this.onTaskRemove.bind(this);
   }
   onAddCancel() {
     this.navigator.dispatch(NavigationActions.back({}));
@@ -32,12 +33,18 @@ export default class PluralTodo extends Component {
   onAddStarted() {
     this.navigator.dispatch(NavigationActions.navigate({ routeName: 'TaskForm' }));
   }
+  onTaskRemove(task) {
+    this.setState({
+      tasks: this.state.tasks.filter(t => t !== task),
+    });
+  }
   render() {
     const Nav = StackNavigator({
       TaskList: {
         screen: createComponent(TaskList, {
           tasks: this.state.tasks,
           onAddStarted: this.onAddStarted,
+          onTaskRemove: this.onTaskRemove,
         }),
       },
       TaskForm: {

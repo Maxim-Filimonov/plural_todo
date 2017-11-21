@@ -33,8 +33,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const renderRow = task => <TaskRow task={task} />;
 function TaskList(props) {
+  const renderRow = task => (<TaskRow
+    task={task}
+    onRemovePressed={() => props.onTaskRemove(task)}
+  />);
   const dataSource = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
   });
@@ -54,6 +57,7 @@ function TaskList(props) {
 TaskList.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   onAddStarted: PropTypes.func.isRequired,
+  onTaskRemove: PropTypes.func.isRequired,
 };
 // This is needed to make HMR stay on the same route
 export default class extends Component {
